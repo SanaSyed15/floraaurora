@@ -239,7 +239,7 @@ export default function ShopPage() {
     const params = new URLSearchParams(window.location.search);
 const collection = params.get("collection");
 
-let url = "http://localhost:5001/api/flowers";
+let url = `${process.env.NEXT_PUBLIC_API_URL}/api/flowers`;
 
 if (collection) {
   url += `?collection=${collection}`;
@@ -251,7 +251,7 @@ fetch(url)
     setFlowers(data);
   });
 
-    fetch(`http://localhost:5001/api/cart/${customer_id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/${customer_id}`)
       .then(res => res.json())
       .then((data: CartItem[]) => setCartCount(data.length));
   }, []);
@@ -292,7 +292,9 @@ fetch(url)
   const customer_id = localStorage.getItem("customer_id");
 
   try {
-    const response = await fetch("http://localhost:5001/api/cart/add", {
+    const response = await fetch(
+  `${process.env.NEXT_PUBLIC_API_URL}/api/cart/add`,
+  {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

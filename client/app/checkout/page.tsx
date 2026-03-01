@@ -28,7 +28,7 @@ export default function CheckoutPage() {
   useEffect(() => {
     if (!customer_id) return;
 
-    fetch(`http://localhost:5001/api/cart/${customer_id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/${customer_id}`)
       .then(res => res.json())
       .then(data => setItems(data));
   }, []);
@@ -42,7 +42,7 @@ export default function CheckoutPage() {
   const total = subtotal + deliveryFee;
 
   const handleCheckout = async () => {
-    const res = await fetch("http://localhost:5001/api/cart/checkout", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/checkout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

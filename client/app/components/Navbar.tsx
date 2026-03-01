@@ -14,7 +14,7 @@ export default function Navbar() {
     if (name) setCustomerName(name);
 
     if (customer_id) {
-      fetch(`http://localhost:5001/api/cart/${customer_id}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/${customer_id}`)
         .then(res => res.json())
         .then(data => setCartCount(data.length));
     }

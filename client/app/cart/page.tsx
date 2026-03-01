@@ -32,7 +32,7 @@ export default function CartPage() {
 
     if (name) setCustomerName(name);
 
-    fetch(`http://localhost:5001/api/cart/${customer_id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/${customer_id}`)
       .then(res => res.json())
       .then(data => {
         setItems(data);
@@ -49,7 +49,7 @@ export default function CartPage() {
   };
 
   const removeItem = async (id: number) => {
-    await fetch(`http://localhost:5001/api/cart/remove/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/remove/${id}`, {
       method: "DELETE",
     });
 
@@ -59,7 +59,7 @@ export default function CartPage() {
   };
 
   const updateQuantity = async (id: number, qty: number) => {
-    await fetch(`http://localhost:5001/api/cart/update/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ quantity: qty }),
